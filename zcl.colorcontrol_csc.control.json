@@ -1,0 +1,44 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.colorcontrol_csc.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Color Control Cluster - Color Space - Control",
+  "definitions": {
+    "zcl.colorcontrol_csc.control.movetocolor": {
+      "properties": {
+        "colorx": {
+          "type": "number",
+          "description": "Move to certain value(s) of color coordinates as fast as possible with transitiontime=0. transitiontime is set by Zigbee 3.0 translator.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.colour.csc",
+            "x-from-ocf": [
+              "colorx =ocf.csc[0]*65536 & transitiontime=0",
+              "zcl.command.colorcontrol::movetocolor(colorx,colory,transitiontime)."
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "colory": {
+          "type": "number",
+          "description": "Move to certain value(s) of color coordinates as fast as possible with transitiontime=0. transitiontime is set by Zigbee 3.0 translator.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.colour.csc",
+            "x-from-ocf": [
+              "colory= ocf.csc[1]*65536 & transitiontime=0",
+              "zcl.command.colorcontrol::movetocolor(colorx,colory,transitiontime)."
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.colorcontrol_csc.control.movetocolor"}
+  ]
+}

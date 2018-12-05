@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.windowcovering_liftposition.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Window Covering Cluster - Lift Position - Control",
+  "definitions": {
+    "zcl.windowcovering_liftposition.control.gotoliftvalue": {
+      "properties": {
+        "liftvalue": {
+          "type": "integer",
+          "description": "Adjust the window at the lift value.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-from-ocf": [
+              "if ocf.openLevel is updated, lift value= ocf.openLevel.",
+              "zcl.command.windowcovering::gotoliftvalue(liftvalue)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.windowcovering_liftposition.control.gotoliftvalue"}
+  ]
+}

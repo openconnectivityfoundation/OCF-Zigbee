@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.windowcovering_liftpercentage.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Window Covering Cluster - Lift Percentage - Control",
+  "definitions": {
+    "zcl.windowcovering_liftpercentage.control.gotoliftpercentage": {
+      "properties": {
+        "percentageliftvalue": {
+          "type": "integer",
+          "description": "Adjust the window at the percentage lift value.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-from-ocf": [
+              "if ocf.openLevel is updated, percentage lift value = ocf.openLevel.",
+              "zcl.command.windowcovering::gotoliftpercentage(percentageliftvalue)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.windowcovering_liftpercentage.control.gotoliftpercentage"}
+  ]
+}

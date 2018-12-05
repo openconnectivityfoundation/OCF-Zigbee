@@ -1,0 +1,44 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.colorcontrol_csc.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Color Control Cluster - Color Space - Information",
+  "definitions": {
+    "zcl.colorcontrol_csc.info": {
+      "type": "object",
+      "properties": {
+        "currentX": {
+          "type": "integer",
+          "description": "current value of the normalized chromaticity value x, as defined in the CIE xy Color Space",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.colour.csc",
+            "x-to-ocf": [
+              "ocf.csc[0] = currentX/65536"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "currentY": {
+          "type": "integer",
+          "description": "current value of the normalized chromaticity value y, as defined in the CIE xy Color Space",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.colour.csc",
+            "x-to-ocf": [
+              "ocf.csc[1] = currentY/65536"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.colorcontrol_csc.info"}
+  ],
+  "required": ["currentx","currenty"]
+}

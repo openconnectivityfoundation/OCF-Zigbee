@@ -1,0 +1,47 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.onoff.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "On/Off Cluster - Control",
+  "definitions": {
+    "zcl.onoff.control.on": {
+      "properties": {
+        "onoff": {
+          "type": "boolean",
+          "description": "Turn on the device",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.switch.binary",
+            "x-from-ocf": [
+              "if ocf.value = true, zcl.command.onoff::on()."
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    },
+    "zcl.onoff.control.off": {
+      "properties": {
+        "onoff": {
+          "type": "boolean",
+          "description": "Turn off the device",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.switch.binary",
+            "x-from-ocf": [
+              "if ocf.value = false, zcl.command.onoff::off()."
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.onoff.control.on"},
+    {"$ref": "#/definitions/zcl.onoff.control.off"}
+  ]
+}

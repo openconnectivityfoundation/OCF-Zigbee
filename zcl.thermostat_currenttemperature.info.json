@@ -1,0 +1,32 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.thermostat_currenttemperature.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Thermostat Cluster - Current Temperature - Information ",
+  "definitions": {
+    "zcl.thermostat_currenttemperature.info": {
+      "type": "object",
+      "properties": {
+        "localtemperature": {
+          "type": "number",
+          "description": "current sensed temperature",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-to-ocf": [
+              "ocf.temperature=localtempearture/100",
+              "units = C"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.thermostat_currenttemperature.info"}
+  ],
+  "required": [ "localtempearture"]
+}

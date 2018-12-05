@@ -1,0 +1,232 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.iaszone.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "IAS Zone Cluster - Information",
+    "definitions": {
+      "zcl.iaszone.info": {
+        "type": "object",
+        "properties": {
+          "zonestate": {
+            "type": "boolean",
+            "description": "Enrollment status of IAS Zone false=not enrolled, true=enrolled",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.iaszone",
+              "x-to-ocf": [
+                  "if zonestate=0x00, ocf.zonestate=false",
+                  "if zonestate=0x01, ocf.zonestate=true"  
+              ],
+              "x-from-ocf": [
+                  "N/A"
+              ]
+            }
+          },
+          "zonetype": {
+            "type": "string",
+            "description": "Zonetype and Meaning of Alarm1 and Alarm2 zonestatus",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.iaszone",
+              "x-to-ocf": [
+                  "if zonetype=0x0000, ocf.zonetype=Standard CIE",
+                  "if zonetype=0x000d, ocf.zonetype=Motion sensor",
+                  "if zonetype=0x0015, ocf.zonetype=Contact switch",
+                  "if zonetype=0x0028, ocf.zonetype=Fire sensor",
+                  "if zonetype=0x002a, ocf.zonetype=Water sensor",
+                  "if zonetype=0x002b, ocf.zonetype=Carbon Monoxide (CO) sensor",
+                  "if zonetype=0x002c, ocf.zonetype=Personal emergency device",
+                  "if zonetype=0x002d, ocf.zonetype=Vibration/Movement sensor",
+                  "if zonetype=0x010f, ocf.zonetype=Remote Control",
+                  "if zonetype=0x0115, ocf.zonetype=Key fob",
+                  "if zonetype=0x021d, ocf.zonetype=Keypad",
+                  "if zonetype=0x0225, ocf.zonetype=Standard Warning Device",
+                  "if zonetype=0x0226, ocf.zonetype=Glass break sensor",
+                  "if zonetype=0x0229, ocf.zonetype=Security repeater",
+                  "if zonetype=0xffff, ocf.zonetype=Invalid Zone Type"
+              ],
+              "x-from-ocf": [
+                  "N/A"
+              ]
+            }
+          },
+          "zonestatus": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "x is a variable. zonestatus in Zigbee maps to zonestatus, zonebattery, and zonepowersource in OCF. Data type of zonestatus in Zigbee is 16 bitmap (xxxxxxxxxxxxxxxx) : bit 0 = Alarm1, bit 1 = Alarm2, bit 2 = Tamper, bit 3 = Battery, bit 4 = Supervision reports, bit 5 = Restore reports, bit 6 = Trouble, bit 7 = AC (mains), bit 8 = Test, bit 9 = Battery Defect. Alarm1 : 1 = opened or alarmed 0 = closed or not alarmed, Alarm2 : 1 = opened or alarmed 0 = closed or not alarmed, Tamper : 1 = Tampered 0 = Not tampered, Battery : 1 = Low battery 0 = Battery OK, Supervision reports : 1 = Reports 0 = Does not report, Restore reports : 1 = Reports restore 0 = Does not report restore, Trouble : 1 = Trouble/Failure 0 = OK, AC (mains) : 1 = AC/Mains fault 0 = AC/Mains OK, Test : 1 = Sensor is in test mode 0 = Sensor is in operation mode, Battery Defect : 1 = Sensor detects a defective battery 0 = Sensor battery is functioning.",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.iaszone",
+              "x-to-ocf": [
+                
+                "if zonetype=0x0000 & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x0000 & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['system']",  
+                "if zonetype=0x0000 & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']",   
+                "if zonetype=0x0000 & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['']",   
+                
+                "if zonetype=0x000d & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x000d & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['intrusion']",  
+                "if zonetype=0x000d & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']",  
+                "if zonetype=0x000d & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['presence']",  
+                "if zonetype=0x000d & zonestatus=xxxxxxxxxxxx11, ocf.zonestatus.alarms=['intrusion','presence']",  
+                
+                "if zonetype=0x0015 & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x0015 & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['1stportalopenclose']",
+                "if zonetype=0x0015 & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x0015 & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['2ndportalopenclose']",
+                "if zonetype=0x0015 & zonestatus=xxxxxxxxxxxx11, ocf.zonestatus.alarms=['1stportalopenclose','2ndportalopenclose']",
+                
+                "if zonetype=0x0028 & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x0028 & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['fire']",
+                "if zonetype=0x0028 & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x0028 & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['']",
+                
+                "if zonetype=0x002a & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x002a & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['wateroverflow']",
+                "if zonetype=0x002a & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x002a & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['']",
+                
+                "if zonetype=0x002b & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x002b & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['CO']",
+                "if zonetype=0x002b & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x002b & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['cooking']",
+                "if zonetype=0x002b & zonestatus=xxxxxxxxxxxx11, ocf.zonestatus.alarms=['CO','cooking']",
+                
+                "if zonetype=0x002c & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x002c & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['fall']", 
+                "if zonetype=0x002c & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x002c & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['emergencybutton']", 
+                "if zonetype=0x002c & zonestatus=xxxxxxxxxxxx11, ocf.zonestatus.alarms=['fall','emergencybutton']", 
+                
+                "if zonetype=0x002d & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x002d & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['movement']", 
+                "if zonetype=0x002d & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x002d & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['vibration']", 
+                "if zonetype=0x002d & zonestatus=xxxxxxxxxxxx11, ocf.zonestatus.alarms=['movement','vibration']", 
+                
+                "if zonetype=0x010f & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x010f & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['panic']", 
+                "if zonetype=0x010f & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x010f & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['emergency']", 
+                "if zonetype=0x010f & zonestatus=xxxxxxxxxxxx11, ocf.zonestatus.alarms=['panic','emergency']", 
+                
+                "if zonetype=0x0115 & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x0115 & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['panic']", 
+                "if zonetype=0x0115 & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x0115 & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['emergency']", 
+                "if zonetype=0x0115 & zonestatus=xxxxxxxxxxxx11, ocf.zonestatus.alarms=['panic','emergency']", 
+                
+                "if zonetype=0x021d & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']",  
+                "if zonetype=0x021d & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['panic']",
+                "if zonetype=0x021d & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x021d & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['emergency']", 
+                "if zonetype=0x021d & zonestatus=xxxxxxxxxxxx11, ocf.zonestatus.alarms=['panic','emergency']", 
+                
+                "if zonetype=0x0225 & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x0225 & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['glassbreak']",
+                "if zonetype=0x0225 & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x0225 & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['']",
+                
+                "if zonetype=0x0226 & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x0226 & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x0226 & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']", 
+                "if zonetype=0x0226 & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['']", 
+                
+                "if zonetype=0x0229 & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x0229 & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x0229 & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']",
+                "if zonetype=0x0229 & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['']",
+                
+                "if zonetype=0xffff & zonestatus=xxxxxxxxxxxxx0, ocf.zonestatus.alarms=['']",
+                "if zonetype=0xffff & zonestatus=xxxxxxxxxxxxx1, ocf.zonestatus.alarms=['']",
+                "if zonetype=0xffff & zonestatus=xxxxxxxxxxxx0x, ocf.zonestatus.alarms=['']",
+                "if zonetype=0xffff & zonestatus=xxxxxxxxxxxx1x, ocf.zonestatus.alarms=['']",
+                
+                "if zonestatus=xxxxxxxxxxx0xx, ocf.zonestatus.tamper=false",
+                "if zonestatus=xxxxxxxxxxx1xx, ocf.zonestatus.tamper=true",
+                
+                "if zonestatus=xxxxxxxxxx0xxx, ocf.zonebattery.charge=100 & ocf.zonebattery.lowbattery=false",
+                "if zonestatus=xxxxxxxxxx1xxx, ocf.zonebattery.charge=100 & ocf.zonebattery.lowbattery=true",
+                
+                "if zonestatus=xxxxxxxx00xxxx, ocf.zonestatus.zonestatusreports='none'",
+                "if zonestatus=xxxxxxxx01xxxx, ocf.zonestatus.zonestatusreports='statuschangeonly' ",
+                "if zonestatus=xxxxxxxx10xxxx, ocf.zonestatus.zonestatusreports='alarmclearonly' ",
+                "if zonestatus=xxxxxxxx11xxxx, ocf.zonestatus.zonestatusreports='statuschangeandalarmclear'",
+                
+                "if zonestatus=xxxxxxx0xxxxxx, ocf.zonestatus.fault=false",
+                "if zonestatus=xxxxxxx1xxxxxx, ocf.zonestatus.fault=true",
+                
+                "if zonestatus=xxxxxx0xxxxxxx, ocf.zonepowersource.powerSources=['AC (Mains) Power'] & ocf.zonepowersource.sourcefault=false",
+                "if zonestatus=xxxxxx1xxxxxxx, ocf.zonepowersource.powerSources=['AC (Mains) Power'] & ocf.zonepowersource.sourcefault=true",
+                
+                "if zonestatus=xxxxx0xxxxxxxx, ocf.zonestatus.test=false",
+                "if zonestatus=xxxxx1xxxxxxxx, ocf.zonestatus.test=true",
+                
+                "if zonestatus=xxxx0xxxxxxxxx, ocf.zonepowersource.powerSources=['Internal Battery'] & oic.r.ias.zone.zonebattery.defect=false & oic.r.ias.zone.zonebattery.charge=100.",
+                "if zonestatus=xxxx1xxxxxxxxx, oic.r.ias.zone.zonepowersource.powerSources=['Internal Battery'] & oic.r.ias.zone.zonebattery.defect=true & oic.r.ias.zone.zonebattery.charge=100."
+              ],
+              "x-from-ocf": [
+                  "N/A"
+              ]
+            }
+          },
+          "IAS_CIE_address": {
+            "type": "string",
+            "description": "Address of IAS Control and Indicating Equipment (CIE)",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.iaszone",
+              "x-to-ocf": [
+                "ocf.iascieaddress= IAS_CIE_address"
+              ],
+              "x-from-ocf": [
+                  "N/A"
+              ]
+            }
+          },
+          "zoneID": {
+            "type": "integer",
+            "description": "Unique id allocated by IAS CIE",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.iaszone",
+              "x-to-ocf": [
+                "ocf.zoneid=zoneID"
+              ],
+              "x-from-ocf": [
+                  "N/A"
+              ]
+            }
+          },
+          "numberofzonesensitivitylevelsupported": {
+            "type": "integer",
+            "description": "Total number of sensitivity levels supported by the IAS Zone",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.iaszone",
+              "x-to-ocf": [
+                "ocf.numzonesensitivitylevel= numberofzonesensitivitylevelsupported"
+              ],
+              "x-from-ocf": [
+                  "N/A"
+              ]
+            }
+          },
+          "currentzonesensitivitylevel": {
+            "type": "integer",
+            "description": "Sensitivity level of IAS Zone",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.iaszone",
+              "x-to-ocf": [
+                "ocf.currentzonesensitivitylevel = currentzonesensitivitylevel"
+              ],
+              "x-from-ocf": [
+                  "N/A"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "type": "object",
+    "allOf": [
+      {"$ref": "#/definitions/zcl.iaszone.info"}
+    ],
+    "required": [ "zonestate"]
+  }

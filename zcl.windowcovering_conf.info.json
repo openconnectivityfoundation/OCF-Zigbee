@@ -1,0 +1,125 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.windowcovering_conf.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Window Covering Cluster - Configuration - Information",
+  "definitions": {
+    "zcl.windowcovering_conf.info": {
+      "type": "object",
+      "properties": {
+        "Windowcoveringtype": {
+          "type": "string",
+          "description": "Type of Window Covering(i.e., [Rollershade,RollerShade-2 Motor, RollerShade-Exterior, RollerShade-Exterior-2 Motor, Drapery, Awning, Shutter, Tilt Blind - Tilt Only, Tilt Blind – Lift and Tilt, Projector Screen])",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-to-ocf": [
+              "if WindowCoveringType=0x00,  ocf.windowcoveringtype= Rollershade.",
+              "if WindowCoveringType=0x01,  ocf.windowcoveringtype= RollerShade-2 Motor.",
+              "if WindowCoveringType=0x02,  ocf.windowcoveringtype= RollerShade-Exterior.",
+              "if WindowCoveringType=0x03,  ocf.windowcoveringtype= RollerShade-Exterior-2 Motor.",
+              "if WindowCoveringType=0x04,  ocf.windowcoveringtype= Drapery.",
+              "if WindowCoveringType=0x05,  ocf.windowcoveringtype= Awning.",
+              "if WindowCoveringType=0x06,  ocf.windowcoveringtype= Shutter.",
+              "if WindowCoveringType=0x07,  ocf.windowcoveringtype= Tilt Blind - Tilt Only.",
+              "if WindowCoveringType=0x08,  ocf.windowcoveringtype= Tilt Blind – Lift and Tilt.",
+              "if WindowCoveringType=0x09,  ocf.windowcoveringtype= Projector Screen."
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "Config/Status": {
+          "type": "integer",
+          "description": " x is a variable. Config/Status in Zigbee maps to configstatus in OCF. Data type of Config/Status in Zigbee is 8 bitmap (xxxxxxxx) : bit 0 = Operational, bit 1 = Online, bit 2 = Reversal, bit 3 = Control-Lift, bit 4 = Control-Tilt, bit 5 =  Encoder-Lift, bit 6 = Encoder-Tilt. Operational: This status bit defines if the Window Covering is operational. 0 = Not Operational, 1 = Operational. Online: This status bit defines if the Window Covering is enabled for transmitting over the ZigBee network. 0 = Not Online, 1 = Online. Reversal: This status bit identifies if the direction of rotation for the Window Covering has been reversed in order for Open/Up commands to match the physical installation condition. 0 = Commands are normal, 1 = Open/Up Commands have been reversed. Control Lift: This status bit identifies if the window covering supports Open Loop or Closed Loop Lift Control. 0 = Lift control is Open Loop, 1 = Lift control is Closed. Control Tilt: This status bit identifies if the window covering supports Open Loop or Closed Loop Tilt Control. 0 = Tilt control is Open Loop, 1 = Tilt control is Closed. Encoder Lift: This status bit identifies if a Closed Loop Controlled Window Covering is employing an encoder for positioning the height of the window covering. 0 = Timer Controlled, 1 = Encoder Controlled. Encoder Tilt: This status bit identifies if a Closed Loop Controlled Window Covering is employing an encoder for tilting the window covering. 0 = Timer Controlled, 1 = Encoder Controlled.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-to-ocf": [
+              "if Config/Status =xxxxxxx0, ocf.configstatus.operational = false",
+              "if Config/Status =xxxxxxx1, ocf.configstatus.operational = true",
+              "if Config/Status =xxxxxx0x, ocf.configstatus.online = false",
+              "if Config/Status =xxxxxx1x, ocf.configstatus.online = true",
+              "if Config/Status =xxxxx0xx, ocf.configstatus.rotationdirection = 'normal'",
+              "if Config/Status =xxxxx1xx, ocf.configstatus.rotationdirection = 'reversed'",
+              "if Config/Status =xxxx0xxx, ocf.configstatus.controllift = 'openloop'",
+              "if Config/Status =xxxx1xxx, ocf.configstatuscontrollift = 'closedloop'",
+              "if Config/Status =xxx0xxxx, ocf.configstatus.controltilt = 'openloop'",
+              "if Config/Status =xxx1xxxx, ocf.configstatus.controltilt = 'closedloop'",
+              "if Config/Status =xx0xxxxx, ocf.configstatus.closedloopliftcontrol = 'timer'",
+              "if Config/Status =xx1xxxxx, ocf.configstatus.closedloopliftcontrol = 'encoder'",
+              "if Config/Status =x0xxxxxx, ocf.configstatus.closedlooptiltcontrol = 'timer'",
+              "if Config/Status =x1xxxxxx, ocf.configstatus.closedlooptiltcontrol = 'encoder'"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "Mode": {
+          "type": "integer",
+          "description": "x is a variable. Mode in Zigbee maps to mode in OCF. Data type of Mode in Zigbee is 8 bitmap (xxxxxxxx) : bit 0 = Reversed Motor Direction, bit 1 = Calibration Mode, bit 2 = Maintenance Mode, bit 3 = LED. Reversed Motor Direction : 0 = motor direction is normal, 1 = motor direction is reversed. Calibration Mode : 0 = run in normal mode, 1 = run in calibration mode. Maintenance Mode : 0 = motor is running normally, 1 = motor is running in maintenance mode. LED: 0 = LEDs are off, 1 = LEDs will display feedback.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-to-ocf": [
+              "if Mode =xxxxxxx0, ocf.mode.motordirection = false",
+              "if Mode =xxxxxxx1, ocf.mode.motordirection = true",
+              "if Mode =xxxxxx0x, ocf.mode.calibration = false",
+              "if Mode =xxxxxx1x, ocf.mode.calibration = true",
+              "if Mode =xxxxx0xx, ocf.mode.maintenance = false",
+              "if Mode =xxxxx1xx, ocf.mode.maintenance = true",
+              "if Mode =xxxx0xxx, ocf.mode.ledfeedback = false",
+              "if Mode =xxxx1xxx, ocf.mode.ledfeedback = true"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "Velocity-Lift": {
+          "type": "integer",
+          "description": "Velocity associtated with Lifting the Window Covering (cm/sec).",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-to-ocf": [
+              "ocf.liftvelocity = Velocity-Lift"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "Acceleration Time-Lift": {
+          "type": "integer",
+          "description": "Ramp up times to reaching the velocity setting (0.1sec).",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-to-ocf": [
+              "ocf.liftaccelerationtime= Acceleration Time-Lift"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "Deceleration Time-Lift": {
+          "type": "integer",
+          "description": "Ramp down times associated with stoping the velocity setting (0.1sec).",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-to-ocf": [
+              "ocf.liftdecelerationtime= Deceleration Time-Lift"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.windowcovering_conf.info"}
+  ],
+  "required": [ "Windowcoveringtype","Config/Status","Mode"]
+}

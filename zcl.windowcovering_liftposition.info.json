@@ -1,0 +1,57 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.windowcovering_liftposition.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Window Covering Cluster - Lift Position - Information",
+  "definitions": {
+    "zcl.windowcovering_liftposition.info": {
+      "type": "object",
+      "properties": {
+        "InstalledClosedLimit-Lift": {
+          "type": "integer",
+          "description": "Close limit for lifting the Window Covering (cm)",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-to-ocf": [
+              "ocf.range[0]= InstalledClosedLimit-Lift"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "InstalledOpenLimit-Lift": {
+          "type": "integer",
+          "description": "Open limit for lifting the Window Covering (cm)",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-to-ocf": [
+              "ocf.range[1]= InstalledOpenLimit-Lift"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "CurrentPosition-Lift": {
+          "type": "integer",
+          "description": "Position of Window Covering from the top of the shade (cm)",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-to-ocf": [
+              "ocf.openLevel= CurrentPosition-Lift"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions//zcl.windowcovering_liftposition.info"}
+  ],
+  "required": [ "InstalledClosedLimit-Lift","InstalledOpenLimit-Lift","CurrentPosition-Lift"]
+}

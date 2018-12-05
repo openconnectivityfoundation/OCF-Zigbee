@@ -1,0 +1,32 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.onoff.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "On/off Cluster - Information",
+  "definitions": {
+    "zcl.onoff": {
+      "type": "object",
+      "properties": {
+        "onoff": {
+          "type": "boolean",
+          "description": "On/off status of the device",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.switch.binary",
+            "x-to-ocf": [
+              "if onoff = false, then ocf.value = false",
+              "if onoff = true, then ocf.value = true"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.onoff.info"}
+  ],
+  "required": [ "onoff" ]
+}

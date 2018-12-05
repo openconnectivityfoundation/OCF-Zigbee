@@ -1,0 +1,79 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.windowcovering_conf.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Window Covering Cluster - Configuration - Control",
+  "definitions": {
+    "zcl.windowcovering_conf.control": {
+      "properties": {
+        "mode": {
+          "type": "integer",
+          "description": "Set the mode. x is a variable. Data type of Mode in Zigbee is 8 bitmap (xxxxxxxx) while data type of mode in OCF is array with 4 Boolean type items(i.e., [Reversed Motor Direction, Calibration Mode, Maintenance Mode, LED]). Reversed Motor Direction : 0 = motor direction is normal, 1 = motor direction is reversed. Calibration Mode : 0 = run in normal mode, 1 = run in calibration mode. Maintenance Mode : 0 = motor is running normally, 1 = motor is running in maintenance mode. LED: 0 = LEDs are off, 1 = LEDs will display feedback.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-from-ocf": [
+              "if ocf.mode is updated & ocf.mode = [false,x,x,x], Mode =xxxxxxx0.",
+              "if ocf.mode is updated & ocf.mode = [true,x,x,x], Mode =xxxxxxx1.",
+              "if ocf.mode is updated & ocf.mode = [false,x,x,x], Mode =xxxxxx0x.",
+              "if ocf.mode is updated & ocf.mode = [true,x,x,x], Mode =xxxxxx1x.",
+              "if ocf.mode is updated & ocf.mode = [false,x,x,x], Mode =xxxxx0xx.",
+              "if ocf.mode is updated & ocf.mode = [true,x,x,x], Mode =xxxxx1xx.",
+              "if ocf.mode is updated & ocf.mode = [false,x,x,x], Mode =xxxx0xxx.",
+              "if ocf.mode is updated & ocf.mode = [true,x,x,x], Mode =xxxx1xxx.",
+              "zcl.command.general::write(mode)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "Velocity-Lift": {
+          "type": "integer",
+          "description": "Set velocity associtated with Lifting the Window Covering (cm/sec).",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-from-ocf": [
+              "if ocf.liftvelocity is updated, Velocity-Lift = ocf.liftvelocity.",
+              "zcl.command.general::write(Velocity-Lift)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "Acceleration Time-Lift": {
+          "type": "integer",
+          "description": "Set ramp up times to reaching the velocity setting (0.1sec).",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-from-ocf": [
+              "if ocf.liftaccelerationtime is updated, Acceleration Time-Lift=ocf.liftaccelerationtime.",
+              "zcl.command.general::write(Acceleration Time-Lift)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "Deceleration Time-Lift": {
+          "type": "integer",
+          "description": "Set ramp down times associated with stoping the velocity setting (0.1sec).",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.windowcovering",
+            "x-from-ocf": [
+              "if ocf.liftdecelerationtime is updated, Deceleration Time-Lift=ocf.liftdecelerationtime.",
+              "zcl.command.general::write(Deceleration Time-Lift)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.windowcovering_conf.control"}
+  ]
+}

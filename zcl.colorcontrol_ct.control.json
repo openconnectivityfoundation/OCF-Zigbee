@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.colorcontrol_ct.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Color Control Cluster - Color Temperature - Control",
+  "definitions": {
+    "zcl.colorcontrol_ct.control.movetocolortemperature": {
+      "properties": {
+        "colortemperature": {
+          "type": "integer",
+          "description": "Move to certain value of colortemperature as fast as possible with transitiontime=0. transitiontime is set by Zigbee 3.0 translator.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.colour.colourtemperature",
+            "x-from-ocf": [
+              "colourtemperature=ocf.ct & transitiontime=0",
+              "zcl.command.colorcontrol::movetocolortemperature(colortemperature,transitiontime)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.colorcontrol_ct.control.movetocolortemperature"}
+  ]
+}

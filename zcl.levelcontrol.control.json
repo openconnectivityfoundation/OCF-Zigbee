@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.levelcontrol.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Level Control Cluster - Control",
+  "definitions": {
+    "zcl.levelcontrol.control.moveto": {
+      "properties": {
+        "level": {
+          "type": "integer",
+          "description": "Move to certain dimming value as fast as possible ",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.light.dimming",
+            "x-from-ocf": [
+              "level=ocf.dimmingSetting * 254 /100 , transitiontime=0",
+              "zcl.command.levelcontrol::movetolevel(level,transitiontime)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+   "allOf": [
+     {"$ref": "#/definitions/zcl.levelcontrol.control.movetolevel"}
+   ]
+}

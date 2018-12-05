@@ -1,0 +1,32 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.occupancysensing.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Occupancy Sensing Cluster - Information",
+  "definitions": {
+    "zcl.occupancysensing.info": {
+      "type": "object",
+      "properties": {
+        "occupancy": {
+          "type": "number",
+          "description": " x is a variable. Data type of occupancy in Zigbee is 8 bitmap (xxxxxxxx) while data type of value in OCF is boolean type  i.e., true=occupied, false=unoccupied",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.sensor.presence",
+            "x-to-ocf": [
+              "if occupancy =xxxxxxx0, then ocf.value = false",
+              "if occupancy =xxxxxxx1, then ocf.value = true"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.occupancysensing.info"}
+  ],
+  "required": [ "occupancy"]
+}

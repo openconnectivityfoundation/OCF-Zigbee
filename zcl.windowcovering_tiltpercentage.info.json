@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.windowcovering_tiltpercentage.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Window Covering Cluster - Tilt Percentage - Information",
+  "definitions": {
+    "zcl.windowcovering_tiltpercentage.info": {
+      "type": "object",
+      "properties": {
+        "CurrentPositionTiltPercentage": {
+          "type": "integer",
+          "description": "Tilt position as a percentage",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-to-ocf": [
+              "ocf.openlevel=CurrentPositionTiltPercentage"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.windowcovering_tiltpercentage.info"}
+  ],
+  "required": ["CurrentPositionTiltPercentage"]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.iaszone.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "IAS Zone Cluster - Control",
+  "definitions": {
+    "zcl.iaszone.control": {
+      "properties": {
+        "currentzonesensitivitylevel": {
+          "type": "integer",
+          "description": "Set a sensitivity level of IAS Zone",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.ias.zone",
+            "x-from-ocf": [
+              "currentzonesensitivitylevel = ocf.currentzonesensitivitylevel",
+              "zcl.command.general::write(currentzonesensitivitylevel)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.iaszone.control"}
+  ]
+}

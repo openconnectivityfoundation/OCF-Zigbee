@@ -1,0 +1,71 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.temperaturemeasurement.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Temperature Measurement Cluster - Information",
+  "definitions": {
+    "zcl.temperaturemeasurement.info": {
+      "type": "object",
+      "properties": {
+        "MeasuredValue": {
+          "type": "number",
+          "description": "Measured value",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-to-ocf": [
+              "ocf.temperature = MeasuredValue/100",
+              "units = C"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "Tolerance": {
+          "type": "number",
+          "description": "Magnitude of the possible error",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-to-ocf": [
+              "ocf.precision = Tolerance/100"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "MinMeasuredValue": {
+          "type": "number",
+          "description": "Minimum value of MeasuredValue",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-to-ocf": [
+              "ocf.range[0] = MinMeasuredValue/100"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "MaxMeasuredValue": {
+          "type": "number",
+          "description": "Maximum value of MeasuredValue",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-to-ocf": [
+              "ocf.range[1] = MaxMeasuredValue/100"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.temperaturemeasurement.info"}
+  ],
+  "required": [ "MeasuredValue","Tolerance","MinMeasuredValue","MaxMeasuredValue"]
+}

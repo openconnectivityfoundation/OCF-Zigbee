@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.levelcontrol.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Level Control Cluster - Information",
+  "definitions": {
+    "zcl.levelcontrol.info": {
+      "type": "object",
+      "properties": {
+        "currentlevel": {
+          "type": "integer",
+          "description": "current dimming value",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.light.dimming",
+            "x-to-ocf": [
+              "ocf.dimmingsetting = currentlevel/254 * 100"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+    "allOf": [
+      {"$ref": "#/definitions/zcl.levelcontrol.info"}
+    ],
+    "required": [ "currentlevel" ]
+  }

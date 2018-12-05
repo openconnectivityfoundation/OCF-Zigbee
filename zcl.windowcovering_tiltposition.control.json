@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.windowcovering_tiltposition.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Window Covering Cluster - Tilt Position - Control",
+  "definitions": {
+    "zcl.windowcovering_tiltposition.control.gototiltvalue": {
+      "properties": {
+        "tiltvalue": {
+          "type": "integer",
+          "description": "Adjust the window at the tilt value.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-from-ocf": [
+              "if ocf.openLevel is updated, tiltvalue= ocf.openLevel.",
+              "zb.command.windowcovering::gototiltvalue(tiltvalue)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.windowcovering_tiltposition.control.gototiltvalue"}
+  ]
+}

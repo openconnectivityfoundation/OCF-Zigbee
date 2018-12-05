@@ -1,0 +1,44 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.colorcontrol_hs.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Color Control Cluster - Hue and Saturation - Information",
+  "definitions": {
+    "zcl.colorcontrol_hs.info": {
+      "type": "object",
+      "properties": {
+        "currenthue": {
+          "type": "integer",
+          "description": "current hue value of the light",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.colour.hs",
+            "x-to-ocf": [
+              "ocf.hue = currenthue/254 * 360"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "currentsaturation": {
+          "type": "integer",
+          "description": "current saturation value of the light",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.colour.hs",
+            "x-to-ocf": [
+              "ocf.saturation = currentsaturation & maximumsaturation=254"
+            ],
+            "x-from-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.colorcontrol_hs.info"}
+  ],
+  "required": ["currenthue","currentsaturation"]
+}

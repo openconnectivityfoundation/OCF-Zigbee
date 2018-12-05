@@ -1,0 +1,31 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.thermostat_heat.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Thermostat Cluster - Heat - Control",
+  "definitions": {
+    "zcl.thermostat_heat.control.setpointraiseLower": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "Set the target temperature with heat mode. Mode=0x00 is set by Zigbee 3.0 translator",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.temperature",
+            "x-from-ocf": [
+              "if ocf.temperature is updated, then amount= ocf.temperature*100.",
+              "zcl.command.thermostat::setpointraiseLower(mode, amount)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.thermostat_heat.control.setpointraiseLower"}
+  ]
+}

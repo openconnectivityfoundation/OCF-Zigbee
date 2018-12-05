@@ -1,0 +1,44 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.colorcontrol_hs.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Color Control Cluster - Hue and Saturation - Control",
+  "definitions": {
+    "zcl.colorcontrol_hs.control.movetohueandsaturation": {
+      "properties": {
+        "hue": {
+          "type": "integer",
+          "description": "Move to certain value(s) of hue or saturation or both as fast as possible with transitiontime=0. transitiontime is set by Zigbee 3.0 translator.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.colour.hs",
+            "x-from-ocf": [
+              "hue=ocf.hue/360 * 254 & transitiontime=0",
+              "zcl.command.colorcontrol::movetohueandsaturation(hue,saturation,transitiontime)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        },
+        "saturation": {
+          "type": "integer",
+          "description": "Move to certain value(s) of hue or saturation or both as fast as possible with transitiontime=0. transitiontime is set by Zigbee 3.0 translator.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.colour.hs",
+            "x-from-ocf": [
+              "saturation=ocf.saturation & transitiontime=0",
+              "zcl.command.colorcontrol::movetohueandsaturation(hue,saturation,transitiontime)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.colorcontrol_hs.control.movetohueandsaturation"}
+  ]
+}

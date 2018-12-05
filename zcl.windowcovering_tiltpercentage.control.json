@@ -1,0 +1,30 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.windowcovering_tiltpercentage.control.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Window Covering Cluster - Tilt Percentage - Control",
+  "definitions": {
+    "zcl.windowcovering_tiltpercentage.control.gototiltpercentage": {
+      "properties": {
+        "percentagetiltvalue": {
+          "type": "integer",
+          "description": "Adjust the window at the percentage tilt value.",
+          "x-ocf-conversion": {
+            "x-ocf-alias": "oic.r.openlevel",
+            "x-from-ocf": [
+              "if ocf.openLevel is updated, percentage tilt value = ocf.openLevel.",
+              "zcl.command.windowcovering::gototiltpercentage(percentagetiltvalue)"
+            ],
+            "x-to-ocf": [
+              "N/A"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/zcl.windowcovering_tiltpercentage.control.gototiltpercentage"}
+  ]
+}

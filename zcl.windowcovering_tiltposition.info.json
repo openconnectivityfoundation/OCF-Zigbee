@@ -1,0 +1,57 @@
+{
+  "id": "http://openinterconnect.org/zigbeemapping/schemas/zcl.windowcovering_tiltposition.info.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Window Covering Cluster - Tilt Position - Information",
+  "definitions": {
+    "zcl.windowcovering_tiltposition.info": {
+      "type": "object",
+        "properties": {
+          "InstalledOpenLimit-Tilt": {
+            "type": "integer",
+            "description": "Close limit for tilting the Window Covering (0.1 degree)",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.openlevel",
+              "x-to-ocf": [
+                "ocf.range[0] = InstalledClosedLimit-Tilt"
+              ],
+              "x-from-ocf": [
+                "N/A"
+              ]
+            }
+          },
+          "InstalledOpenLimit-Tilt": {
+            "type": "integer",
+            "description": "Open limit for tilting the Window Covering (0.1 degree)",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.openlevel",
+              "x-to-ocf": [
+                "ocf.range[1]= InstalledOpenLimit-Tilt"
+              ],
+              "x-from-ocf": [
+                "N/A"
+              ]
+            }
+          },
+          "CurrentPosition-Tilt ": {
+            "type": "integer",
+            "description": "Tilt position of Window Covering from open (0.1 degree)",
+            "x-ocf-conversion": {
+              "x-ocf-alias": "oic.r.openlevel",
+              "x-to-ocf": [
+                "ocf.openlevel= CurrentPosition-Tilt"
+              ],
+              "x-from-ocf": [
+                "N/A"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "type": "object",
+    "allOf": [
+      {"$ref": "#/definitions/zcl.windowcovering_tiltposition.info"}
+    ],
+    "required": [ "InstalledClosedLimit-Tilt","InstalledOpenLimit-Tilt","CurrentPosition-Tilt"]
+  }
